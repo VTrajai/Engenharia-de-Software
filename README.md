@@ -19,3 +19,18 @@ Diferentemente das funcionalidades básicas (o que a aplicação entrega), os re
 4-Proteção (Segurança): Foca em blindar a arquitetura contra invasões e vulnerabilidades. Garante que as informações sejam mantidas em sigilo, preservando a privacidade e a veracidade dos dados armazenados.
 5-Facilidade de Uso (Usabilidade): Diz respeito à experiência do indivíduo ao navegar pelo sistema. Uma ferramenta com alta usabilidade é aquela que se mostra lógica e simples, minimizando a necessidade de manuais complexos.
 ````
+>4. Cenários de Trade-offs
+````
+1. Proteção vs. Facilidade de Uso
+Contexto: Uma plataforma de finanças que impõe múltiplas camadas de verificação (digital, código secreto e leitura facial) para cada operação.
+
+Análise: Embora o nível de SEGURANÇA atinja um patamar rigoroso contra fraudes, a EXPERIÊNCIA DO USUÁRIO é comprometida. O excesso de barreiras torna a navegação burocrática e frustrante para o cliente no dia a dia.
+
+2. Acesso Contínuo vs. Integridade de Dados
+Contexto: Uma rede de servidores globais tentando sincronizar informações durante uma instabilidade técnica.
+
+Análise: Se o foco for a CONSISTÊNCIA, o sistema impedirá qualquer alteração até que todos os nós estejam alinhados (sacrificando o tempo de resposta). Se o foco for a DISPONIBILIDADE, o serviço permanece ativo para o público, porém com o risco de exibir dados divergentes entre diferentes regiões até que a conexão seja restabelecida.
+
+3. Eficiência vs. Orçamento
+Contexto: Acelerar o processamento de um portal para que as páginas carreguem instantaneamente via hardware de última geração.
+````
