@@ -34,3 +34,16 @@ Análise: Se o foco for a CONSISTÊNCIA, o sistema impedirá qualquer alteraçã
 3. Eficiência vs. Orçamento
 Contexto: Acelerar o processamento de um portal para que as páginas carreguem instantaneamente via hardware de última geração.
 ````
+>5. Programa com sintaxe correta, mas com a lógica errada (j+1=>j-1).
+````
+1.
+
+R: Não é possivel testar individualmente cada caso, pois existem 65535 casos de entrada;
+
+2. Quantos erros apontam para o problema de lógica?
+
+R: 4
+
+3. Quais são?
+
+R: -29999; 29999; -30000; e 30000.
