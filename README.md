@@ -47,3 +47,145 @@ R: 4
 3. Quais são?
 
 R: -29999; 29999; -30000; e 30000.
+````
+>6. Exercicio sobre um sistema de "Biblioteca".
+````
+package Main;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Padaria {
+    public static void main(String[] args) {
+        Scanner leitor = new Scanner(System.in);
+        ArrayList<Produto> vitrineProducao = new ArrayList<>();
+        int opcao = 0;
+
+        System.out.println("--- Sistema de Produção: Padaria Java ---");
+
+        do {
+            System.out.println("\n1. Cadastrar Novo Item (Massa)");
+            System.out.println("2. Ver Vitrine de Produção");
+            System.out.println("3. Assar Fornada (Finalizar Item)");
+            System.out.println("4. Sair");
+            System.out.print("Escolha uma opção: ");
+
+            // Uma pequena melhoria para evitar erros se o usuário digitar letras
+            if (!leitor.hasNextInt()) {
+                System.out.println("Por favor, digite um número válido.");
+                leitor.next();
+                continue;
+            }
+
+            opcao = leitor.nextInt();
+            leitor.nextLine();
+
+            switch (opcao) {
+                case 1:
+                    System.out.print("Nome do Alimento: ");
+                    String nome = leitor.nextLine();
+                    System.out.print("Categoria (Pão, Bolo, Salgado): ");
+                    String categoria = leitor.nextLine();
+                    boolean add;
+                    if (vitrineProducao.add(new Produto(nome, categoria))) {
+                        add = true;
+                    } else add = false;
+                    System.out.println("Item enviado para a área de preparo!");
+                    break;
+
+                case 2:
+                    System.out.println("\n--- Status da Produção ---");
+                    if (vitrineProducao.isEmpty()) {
+                        System.out.println("Nenhum item em produção.");
+                    } else {
+                        for (int i = 0; i < vitrineProducao.size(); i++) {
+                            System.out.println(i + ". " + vitrineProducao.get(i));
+                        }
+                    }
+                    break;
+
+                case 3:
+                    System.out.print("Digite o índice do item para assert: ");
+                    int index = leitor.nextInt();
+                    if (index >= 0 && index < vitrineProducao.size()) {
+                        Produto selecionado = vitrineProducao.get(index);
+                        if (selecionado.isAssado()) {
+                            System.out.println("Este item já está assado e pronto para venda!");
+                        } else {
+                            selecionado.setAssado(true);
+                            System.out.println("O " + selecionado.getNome() + " acabou de sair do forno! Cheiro de pão fresco no ar.");
+                        }
+                    } else {
+                        System.out.println("Item não encontrado na produção.");
+                    }
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + opcao);
+            }
+
+        } while (opcao != 4);
+        leitor.close();
+        System.out.println("Sistema da padaria desligado.");
+
+    }
+}
+
+package Main;
+
+public class Produto {
+    private String nome;
+    private String categoria; // Ex: Pão, Doce, Salgado
+    private boolean assado;
+
+    public Produto(String nome, String categoria) {
+        this.nome = nome;
+        this.categoria = categoria;
+        this.assado = false; // Todo produto começa na vitrine de produção
+    }
+
+    // Getters
+    public String getNome() { return nome; }
+    public String getCategoria() { return categoria; }
+    public boolean isAssado() { return assado; }
+
+    // Setter para atualizar quando sair do forno
+    public void setAssado(boolean assado) {
+        this.assado = assado;
+    }
+
+    @Override
+    public String toString() {
+        String status = assado ? "[QUENTINHO]" : "[NO FORNO]";
+        return status + " " + nome + " (" + categoria + ")";
+    }
+}
+
+package Main;
+
+import java.util.ArrayList;
+
+public class Homologação {
+    public static void main(String[] args) {
+        ArrayList<Produto> estoqueTeste = new ArrayList<>();
+
+        // Simulação de produção
+        estoqueTeste.add(new Produto("Pão Francês", "Pães"));
+        estoqueTeste.add(new Produto("Croissant de Chocolate", "Doces"));
+        estoqueTeste.add(new Produto("Coxinha", "Salgados"));
+
+        System.out.println("Verificando itens na fila de espera...");
+        if (estoqueTeste.size() == 3) {
+            System.out.println("Sucesso: 3 massas aguardando o forno.");
+        }
+
+        // Testando a lógica de "Assar"
+        Produto teste = estoqueTeste.get(0);
+        System.out.println("Status inicial: " + teste);
+        teste.setAssado(true);
+
+        if (teste.isAssado()) {
+            System.out.println("Sucesso: O status do " + teste.getNome() + " mudou para assado.");
+            System.out.println("Status final: " + teste);
+        }
+    }
+}
